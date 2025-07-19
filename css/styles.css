@@ -880,6 +880,36 @@ body {
     color: var(--primary-color);
 }
 
+/* Nuevo contenedor para formulario de ancho completo */
+.contact-form-only {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-form-only h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+}
+
+.google-form-container-full {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    background: var(--bg-primary);
+}
+
+.google-form-container-full iframe {
+    width: 100%;
+    min-height: 800px;
+    border: none;
+    border-radius: var(--border-radius);
+}
+
 .google-form-container {
     width: 100%;
     max-width: 100%;
@@ -905,6 +935,15 @@ body {
     .google-form-container iframe {
         min-height: 600px;
     }
+    
+    .google-form-container-full iframe {
+        min-height: 650px;
+    }
+    
+    .contact-form-only {
+        max-width: 100%;
+        padding: 0 1rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -912,7 +951,12 @@ body {
         min-height: 500px;
     }
     
-    .contact-form h3 {
+    .google-form-container-full iframe {
+        min-height: 550px;
+    }
+    
+    .contact-form h3,
+    .contact-form-only h3 {
         font-size: 1.5rem;
     }
 }
