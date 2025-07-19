@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Typewriter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 50px;
+            background: #f0f0f0;
+        }
+        .test-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .typewriter {
+            position: relative;
+            display: inline-block;
+            min-width: 2px;
+            color: #3b82f6;
+            font-weight: bold;
+        }
+        .typewriter::after {
+            content: '';
+            position: absolute;
+            right: -3px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #3b82f6;
+            animation: blink 1s infinite;
+        }
+        .typewriter.typing::after {
+            display: block;
+        }
+        .typewriter.finished::after {
+            display: none;
+        }
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="test-title">Test Typewriter Effect</h1>
+    <p>¡Hola! Soy <span class="typewriter" id="typewriter"></span></p>
+    
+    <script>
+        let typewriterExecuted = false; // Bandera para evitar múltiples ejecuciones
+
+        function initTypewriter() {
+            // Prevenir múltiples ejecuciones
+            if (typewriterExecuted) {
+                console.log('⚠️ Typewriter ya ejecutado, saltando...');
+                return;
+            }
+            
+            console.log('=== INICIANDO TYPEWRITER ===');
+            
+            const element = document.getElementById('typewriter');
+            const text = "FireDevelop";
+            let index = 0;
+            let isWriting = false; // Bandera para controlar el estado de escritura
+            
+            console.log('Elemento encontrado:', element);
+            
+            if (!element) {
+                console.error('❌ Elemento typewriter no encontrado');
+                return;
+            }
+            
+            // Marcar como ejecutado
+            typewriterExecuted = true;
+            
+            // Limpiar cualquier contenido existente
+            element.innerHTML = '';
+            element.textContent = '';
+            element.classList.add('typing');
+            
+            console.log('✅ Iniciando escritura del texto:', text);
+            
+            function escribirLetra() {
+                // Verificar que no se esté ejecutando otra escritura
+                if (isWriting) {
+                    console.log('⚠️ Ya hay una escritura en progreso');
+                    return;
+                }
+                
+                isWriting = true;
+                
+                if (index < text.length) {
+                    const letra = text.charAt(index);
+                    element.textContent += letra;
+                    console.log(`📝 Letra ${index + 1}/${text.length}: "${letra}" - Texto actual: "${element.textContent}"`);
+                    index++;
+                    
+                    // Continuar con la siguiente letra
+                    setTimeout(() => {
+                        isWriting = false;
+                        escribirLetra();
+                    }, 200);
+                } else {
+                    console.log('✅ Escritura completada:', element.textContent);
+                    isWriting = false;
+                    
+                    // Finalizar el efecto
+                    setTimeout(() => {
+                        element.classList.remove('typing');
+                        element.classList.add('finished');
+                        console.log('🎉 Efecto typewriter finalizado');
+                    }, 1000);
+                }
+            }
+            
+            // Iniciar escritura después de un delay
+            setTimeout(() => {
+                console.log('🚀 Comenzando escritura...');
+                escribirLetra();
+            }, 1000);
+        }
+        
+        // Solo ejecutar una vez cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🚀 DOM cargado');
+            setTimeout(initTypewriter, 100);
+        });
+    </script>
+</body>
+</html>

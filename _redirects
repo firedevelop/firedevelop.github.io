@@ -1,0 +1,16 @@
+# Redirects para Netlify
+/*    /index.html   200
+
+# Redirecciones para SEO
+/portfolio    /index.html#proyectos   302
+/projects     /index.html#proyectos   302
+/about        /index.html#sobre-mi    302
+/contact      /index.html#contacto    302
+/skills       /index.html#habilidades 302
+
+# Headers de seguridad
+/*
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
