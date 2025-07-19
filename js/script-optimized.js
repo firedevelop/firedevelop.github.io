@@ -41,20 +41,28 @@ document.querySelectorAll('.nav-link').forEach(link => {
 // Navegación suave y activa
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', function(e) {
-        e.preventDefault();
         const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
         
-        if (targetElement) {
-            targetElement.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+        // Solo prevenir comportamiento por defecto si es un enlace interno (ancla)
+        if (targetId.startsWith('#')) {
+            e.preventDefault();
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+            
+            // Actualizar enlace activo
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+        } else if (targetId.includes('#')) {
+            // Para enlaces como "index.html#section", no prevenir, pero cerrar menú móvil
+            if (navMenu) navMenu.classList.remove('active');
+            if (mobileMenu) mobileMenu.classList.remove('active');
         }
-        
-        // Actualizar enlace activo
-        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-        this.classList.add('active');
     });
 });
 
