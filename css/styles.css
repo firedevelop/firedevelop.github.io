@@ -241,6 +241,16 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 400px;
+    position: relative;
+}
+
+.hero-image::before,
+.hero-image::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(59, 130, 246, 0.3);
+    animation: float-bubble 6s ease-in-out infinite;
 }
 
 .profile-image {

@@ -384,9 +384,9 @@ function createParticles() {
         particle.className = 'particle';
         particle.style.cssText = `
             position: absolute;
-            width: 2px;
-            height: 2px;
-            background: rgba(59, 130, 246, 0.3);
+            width: 3px;
+            height: 3px;
+            background: rgba(59, 130, 246, 0.45);
             border-radius: 50%;
             animation: float-particle ${Math.random() * 3 + 2}s infinite ease-in-out;
         `;

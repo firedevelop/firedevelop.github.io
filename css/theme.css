@@ -152,20 +152,20 @@
 
 .particle {
     position: absolute;
-    width: 2px;
-    height: 2px;
-    background: rgba(59, 130, 246, 0.3);
+    width: 3px;        /* 👈 Tamaño de la partícula */
+    height: 3px;
+    background: rgba(59, 130, 246, 0.45);  /* 👈 Color y opacidad */
     border-radius: 50%;
 }
 
 @keyframes float-particle {
     0%, 100% { 
         transform: translateY(0px) rotate(0deg);
-        opacity: 1;
+        opacity: 1;    /* 👈 Opacidad inicial */
     }
     50% { 
-        transform: translateY(-20px) rotate(180deg);
-        opacity: 0.5;
+        transform: translateY(-20px) rotate(180deg);  /* 👈 Movimiento vertical */
+        opacity: 0.9;  /* 👈 Opacidad intermedia */
     }
 }
 
@@ -247,3 +247,14 @@
         transform: rotate(45deg) translate(-5px, -6px);
     }
 }
+
+/* Número de partículas (línea 382)
+for (let i = 0; i < 50; i++) {  /* 👈 Cantidad de partículas */
+
+/* Estilo de partículas (líneas 384-391)
+particle.style.cssText = `
+    width: 2px;    /* 👈 Tamaño */
+    height: 2px;
+    background: rgba(59, 130, 246, 0.3);  /* 👈 Color y opacidad */
+    animation: float-particle ${Math.random() * 3 + 2}s infinite ease-in-out;  /* 👈 Velocidad */
+`;
