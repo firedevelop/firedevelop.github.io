@@ -5,7 +5,7 @@
     --primary-color: #3b82f6;
     --primary-dark: #2563eb;
     --secondary-color: #64748b;
-    --accent-color: #f59e0b;
+    --accent-color: #F93E05;
     --text-primary: #1f2937;
     --text-secondary: #6b7280;
     --text-light: #9ca3af;
@@ -84,6 +84,7 @@ body {
 }
 
 .nav-logo .logo-text {
+    color: var(--text-secondary);
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
 }
@@ -167,6 +168,7 @@ body {
 }
 
 .text-gradient {
+    font-family: 'Montserrat', sans-serif;
     background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

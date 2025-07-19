@@ -11,7 +11,7 @@ function initTypewriter() {
     console.log('=== INICIANDO TYPEWRITER ===');
     
     const element = document.getElementById('typewriter');
-    const text = "FireDevelop";
+    const text = "fireDevelop";
     let index = 0;
     let isWriting = false; // Bandera para controlar el estado de escritura
     
