@@ -155,11 +155,76 @@ function updateCurrentYear() {
     }
 }
 
+// Efecto hover/tap para imagen de perfil
+function initProfileImageEffect() {
+    const profileImage = document.getElementById('profileImage');
+    
+    if (!profileImage) return;
+    
+    const originalSrc = profileImage.dataset.original;
+    const hoverSrc = profileImage.dataset.hover;
+    let isHovered = false;
+    
+    // Precargar la imagen hover para evitar delay
+    const hoverImg = new Image();
+    hoverImg.src = hoverSrc;
+    
+    // Función para cambiar imagen con efecto fade suave
+    function changeImage(newSrc) {
+        profileImage.style.opacity = '0.7';
+        setTimeout(() => {
+            profileImage.src = newSrc;
+            profileImage.style.opacity = '1';
+        }, 100);
+    }
+    
+    // Desktop: eventos mouse
+    profileImage.addEventListener('mouseenter', () => {
+        changeImage(hoverSrc);
+        isHovered = true;
+    });
+    
+    profileImage.addEventListener('mouseleave', () => {
+        changeImage(originalSrc);
+        isHovered = false;
+    });
+    
+    // Móvil: evento touch/click (toggle)
+    profileImage.addEventListener('click', (e) => {
+        // Solo en móvil (cuando no hay capacidad hover)
+        if (!window.matchMedia('(hover: hover)').matches) {
+            e.preventDefault(); // Prevenir comportamientos no deseados
+            
+            if (isHovered) {
+                changeImage(originalSrc);
+                isHovered = false;
+            } else {
+                changeImage(hoverSrc);
+                isHovered = true;
+            }
+        }
+    });
+    
+    // Agregar indicación visual de interactividad en móvil
+    if (!window.matchMedia('(hover: hover)').matches) {
+        profileImage.style.filter = 'brightness(0.95)';
+        profileImage.addEventListener('touchstart', () => {
+            profileImage.style.filter = 'brightness(1)';
+        });
+        profileImage.addEventListener('touchend', () => {
+            setTimeout(() => {
+                profileImage.style.filter = 'brightness(0.95)';
+            }, 100);
+        });
+    }
+}
+
 // Inicialización optimizada
 document.addEventListener('DOMContentLoaded', () => {
     // Funciones críticas primero
     initTypewriter();
     updateCurrentYear();
+    initProfileImageEffect();
     
     // Funciones no críticas con delay
     setTimeout(() => {
