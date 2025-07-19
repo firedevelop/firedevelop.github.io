@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-
 /* Variables CSS */
 :root {
     --primary-color: #3b82f6;
@@ -1474,5 +1472,58 @@ body {
     /* Mejorar rendimiento eliminando animaciones complejas */
     .hero-placeholder {
         animation: none !important;
+    }
+}
+
+/* Estilos para partículas optimizados */
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: rgba(59, 130, 246, 0.7);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: float-particle 3s linear infinite;
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+    z-index: 1;
+}
+
+@keyframes float-particle {
+    0% { 
+        transform: translateY(0px) translateX(0px) rotate(0deg);
+        opacity: 0.8;
+    }
+    25% {
+        transform: translateY(-30px) translateX(15px) rotate(90deg);
+        opacity: 1;
+    }
+    50% { 
+        transform: translateY(-60px) translateX(-10px) rotate(180deg);
+        opacity: 0.6;
+    }
+    75% {
+        transform: translateY(-30px) translateX(-15px) rotate(270deg);
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateY(0px) translateX(0px) rotate(360deg);
+        opacity: 0.8;
+    }
+}
+
+/* Accesibilidad - reducir animaciones si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce) {
+    .particle {
+        animation: none;
+    }
+    
+    /* Mantener animaciones esenciales pero reducidas */
+    .typewriter::after {
+        animation: blink 0.5s infinite;
+    }
+    
+    .hero-placeholder,
+    .about-placeholder {
+        animation: none;
     }
 }
