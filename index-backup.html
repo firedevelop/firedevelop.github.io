@@ -8,18 +8,56 @@
     <meta name="author" content="FireDevelop">
     <title>FireDevelop - Desarrollador Full Stack</title>
     <link rel="icon" type="image/webp" href="images/logo.webp">
-    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- CSS crítico inline para mejorar LCP -->
+    <style>
+        /* Critical CSS - Above the fold */
+        body{margin:0;font-family:'Poppins',sans-serif;background:#0f172a;color:#e2e8f0;overflow-x:hidden}
+        .navbar{position:fixed;top:0;width:100%;background:rgba(15,23,42,0.95);backdrop-filter:blur(10px);z-index:1000;padding:1rem 0;transition:all 0.3s ease}
+        .nav-container{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:0 2rem}
+        .nav-logo{display:flex;align-items:center;text-decoration:none;font-weight:600;color:#3b82f6;font-size:1.5rem}
+        .logo-image{width:32px;height:32px;margin-right:0.5rem;border-radius:50%}
+        .hero{min-height:100vh;display:flex;align-items:center;padding:6rem 0 2rem;background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);position:relative;overflow:hidden}
+        #particles-container{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+        .particle{position:absolute;background:rgba(59,130,246,0.6);border-radius:50%;pointer-events:none;animation:float 6s ease-in-out infinite}
+        @keyframes float{0%,100%{transform:translateY(0px)}50%{transform:translateY(-20px)}}
+        .hero-container{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;padding:0 2rem;position:relative;z-index:1}
+        .hero-title{font-size:3.5rem;font-weight:700;margin-bottom:1rem;line-height:1.2}
+        .text-gradient{background:linear-gradient(135deg,#3b82f6,#8b5cf6,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .profile-image{width:250px;height:250px;border-radius:50%;object-fit:cover;border:5px solid #3b82f6;box-shadow:0 10px 30px rgba(59,130,246,0.5);transition:transform 0.3s ease,box-shadow 0.3s ease,opacity 0.2s ease;cursor:pointer;user-select:none}
+        @media (max-width:768px){
+            .hero-container{grid-template-columns:1fr;text-align:center;gap:2rem}
+            .hero-title{font-size:2.5rem}
+            .profile-image{width:170px;height:170px}
+            .logo-image{width:24px;height:24px}
+            .nav-container{padding:0 1rem}
+        }
+    </style>
+    
+    <!-- Preconnect para optimizar fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- CSS no crítico diferido -->
+    <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/styles.css"></noscript>
+    
+    <!-- Font Awesome diferido -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    
+    <!-- Fuentes con display swap para mejor rendimiento -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <!-- Navegación -->
     <nav class="navbar">
         <div class="nav-container">
             <a href="#" class="nav-logo">
-                <img src="images/logo.webp" alt="FireDevelop Logo" class="logo-image">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="images/logo-small.webp">
+                    <img src="images/logo.webp" alt="FireDevelop Logo" class="logo-image" width="32" height="32">
+                </picture>
                 <span class="logo-text">fireDevelop</span>
             </a>
             <div class="nav-toggle" id="mobile-menu">
@@ -49,6 +87,9 @@
 
     <!-- Sección Inicio -->
     <section id="inicio" class="hero">
+        <!-- Contenedor de partículas -->
+        <div id="particles-container"></div>
+        
         <div class="hero-container">
             <div class="hero-content">
                 <h1 class="hero-title">¡Hola! Soy <span class="text-gradient typewriter" id="typewriter"></span></h1>
@@ -63,13 +104,22 @@
                 </div>
             </div>
             <div class="hero-image">
-                <img src="images/profile.webp" 
-                     alt="FireDevelop - Desarrollador Full Stack" 
-                     class="profile-image" 
-                     loading="lazy"
-                     id="profileImage"
-                     data-original="images/profile.webp"
-                     data-hover="images/profile-hack-1.webp">
+                <picture>
+                    <source media="(max-width: 768px)" 
+                            srcset="images/profile-small.webp" 
+                            data-hover-small="images/profile-hack-1-small.webp">
+                    <img src="images/profile.webp" 
+                         alt="FireDevelop - Desarrollador Full Stack" 
+                         class="profile-image" 
+                         loading="lazy"
+                         id="profileImage"
+                         data-original="images/profile.webp"
+                         data-hover="images/profile-hack-1.webp"
+                         data-original-small="images/profile-small.webp"
+                         data-hover-small="images/profile-hack-1-small.webp"
+                         width="250" 
+                         height="250">
+                </picture>
             </div>
         </div>
         <div class="scroll-indicator">
@@ -432,6 +482,9 @@
                             </div>
                         </div>
                     </div>
+
+                <!-- Proyectos adicionales (ocultos inicialmente) -->
+
                     <div class="project-content">
                         <h3>Odoo</h3>
                         <p>Implementación de Odoo con Docker para facilitar el despliegue. Configuración completa para sistemas ERP empresariales.</p>
@@ -443,7 +496,7 @@
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card more-projects" style="display: none;">
                     <div class="project-image">
                         <img src="images/projects/09.1.webp" alt="UniFi" loading="lazy">
                         <div class="project-overlay">
@@ -459,8 +512,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Proyectos adicionales (ocultos inicialmente) -->
 
                 <div class="project-card more-projects" style="display: none;">
                     <div class="project-image">
@@ -978,6 +1029,22 @@
         </div>
     </footer>
 
-    <script src="js/script-optimized.js"></script>
+    <!-- Script diferido para mejor rendimiento -->
+    <script>
+        // Cargar JavaScript de manera asíncrona después del DOM
+        function loadScript() {
+            const script = document.createElement('script');
+            script.src = 'js/script-optimized.js';
+            script.async = true;
+            document.body.appendChild(script);
+        }
+        
+        // Cargar script cuando el DOM esté listo
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadScript);
+        } else {
+            loadScript();
+        }
+    </script>
 </body>
 </html>
