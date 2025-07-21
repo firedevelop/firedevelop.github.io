@@ -257,7 +257,7 @@ Si tienes preguntas o sugerencias:
 
 - [Font Awesome](https://fontawesome.com) por los iconos
 - [Google Fonts](https://fonts.google.com) por la tipografía
-- Comunidad de desarrolladores por la inspiración
+- Comunidad de desarrolladores por la inspiración.
 
 ---
 
